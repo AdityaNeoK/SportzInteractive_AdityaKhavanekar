@@ -41,3 +41,8 @@ struct BowlingStats{
     static var wickets = "Wickets"
 }
 
+struct CheckCaptainKeeper{
+    static var captain = "(C)"
+    static var keeper = "(WK)"
+    static var Both = "(C)(WK)"
+}

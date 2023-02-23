@@ -10,7 +10,6 @@
 		1828CC4A29A7230800966317 /* PlayerInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828CC4929A7230800966317 /* PlayerInfoViewModel.swift */; };
 		18AD1A8729A4CAB400426352 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AD1A8629A4CAB400426352 /* AppDelegate.swift */; };
 		18AD1A8929A4CAB400426352 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AD1A8829A4CAB400426352 /* SceneDelegate.swift */; };
-		18AD1A8B29A4CAB400426352 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AD1A8A29A4CAB400426352 /* ViewController.swift */; };
 		18AD1A8E29A4CAB400426352 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AD1A8C29A4CAB400426352 /* Main.storyboard */; };
 		18AD1A9129A4CAB400426352 /* TeamApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18AD1A8F29A4CAB400426352 /* TeamApp.xcdatamodeld */; };
 		18AD1A9329A4CAB600426352 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18AD1A9229A4CAB600426352 /* Assets.xcassets */; };
@@ -58,7 +57,6 @@
 		18AD1A8329A4CAB400426352 /* TeamApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18AD1A8629A4CAB400426352 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18AD1A8829A4CAB400426352 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		18AD1A8A29A4CAB400426352 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		18AD1A8D29A4CAB400426352 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18AD1A9029A4CAB400426352 /* TeamApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TeamApp.xcdatamodel; sourceTree = "<group>"; };
 		18AD1A9229A4CAB600426352 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -128,6 +126,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		1828CC4E29A7553200966317 /* MatchDetailModel */ = {
+			isa = PBXGroup;
+			children = (
+				18AD1ABC29A4CB5300426352 /* MatchDetailModel.swift */,
+			);
+			path = MatchDetailModel;
+			sourceTree = "<group>";
+		};
 		18AD1A7A29A4CAB400426352 = {
 			isa = PBXGroup;
 			children = (
@@ -158,7 +164,6 @@
 				1828CC4B29A735FB00966317 /* Utils */,
 				18AD1A8629A4CAB400426352 /* AppDelegate.swift */,
 				18AD1A8829A4CAB400426352 /* SceneDelegate.swift */,
-				18AD1A8A29A4CAB400426352 /* ViewController.swift */,
 				18AD1A8C29A4CAB400426352 /* Main.storyboard */,
 				18AD1A9229A4CAB600426352 /* Assets.xcassets */,
 				18AD1A9429A4CAB600426352 /* LaunchScreen.storyboard */,
@@ -208,7 +213,7 @@
 		18AD1ABB29A4CAED00426352 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				18AD1ABC29A4CB5300426352 /* MatchDetailModel.swift */,
+				1828CC4E29A7553200966317 /* MatchDetailModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -433,7 +438,6 @@
 				1828CC4A29A7230800966317 /* PlayerInfoViewModel.swift in Sources */,
 				18DB630B29A4CCDC001932A1 /* MatchesViewController.swift in Sources */,
 				18AD1A9129A4CAB400426352 /* TeamApp.xcdatamodeld in Sources */,
-				18AD1A8B29A4CAB400426352 /* ViewController.swift in Sources */,
 				18AD1A8729A4CAB400426352 /* AppDelegate.swift in Sources */,
 				18AD1ABD29A4CB5300426352 /* MatchDetailModel.swift in Sources */,
 				18AD1A8929A4CAB400426352 /* SceneDelegate.swift in Sources */,
@@ -626,7 +630,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Neosoft.TeamApp;
+				PRODUCT_BUNDLE_IDENTIFIER = NeosoftK.TeamApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -654,7 +658,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Neosoft.TeamApp;
+				PRODUCT_BUNDLE_IDENTIFIER = NeosoftK.TeamApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

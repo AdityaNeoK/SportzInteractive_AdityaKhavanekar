@@ -8,11 +8,9 @@
 import UIKit
 
 class PlayerInfoViewController: UIViewController {
-    
+    //Outlets
     @IBOutlet weak var statsSegmentControl: UISegmentedControl!
-    
     @IBOutlet weak var playerNameLbl: UILabel!
-    
     @IBOutlet weak var statOneLbl: UILabel!
     @IBOutlet weak var statTwoLbl: UILabel!
     @IBOutlet weak var statThreeLbl: UILabel!
@@ -23,18 +21,15 @@ class PlayerInfoViewController: UIViewController {
     @IBOutlet weak var statThreeInfoLbl: UILabel!
     @IBOutlet weak var statFourInfoLbl: UILabel!
     
+    //Variables
     var playerInfoViewModel:PlayerInfoViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        self.setupUI()
     }
     
-    private func setupUI(){
-        setupSegmentControl()
-        self.playerNameLbl.text = playerInfoViewModel?.player?.nameFull
-    }
-    
+    //Segment Action
     @IBAction func statSelected(_ sender: UISegmentedControl) {
         switch self.statsSegmentControl.selectedSegmentIndex{
         case 0:
@@ -46,19 +41,26 @@ class PlayerInfoViewController: UIViewController {
         }
     }
     
+    //Dismiss Action
     @IBAction func dismissClicked(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
     
+    //UI Function
+    private func setupUI(){
+        self.setupSegmentControl()
+        self.playerNameLbl.text = self.playerInfoViewModel?.getPlayerInfo()?.nameFull
+    }
     
+    //Setup Segmented Control
     private func setupSegmentControl(){
         
-        statsSegmentControl.backgroundColor = .lightGray
-        statsSegmentControl.selectedSegmentTintColor = .black
-        statsSegmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        statsSegmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
-        statsSegmentControl.setTitle(BattingStats.battingStats, forSegmentAt: 0)
-        statsSegmentControl.setTitle(BowlingStats.bowlingStats, forSegmentAt: 1)
+        self.statsSegmentControl.backgroundColor = .lightGray
+        self.statsSegmentControl.selectedSegmentTintColor = .black
+        self.statsSegmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        self.statsSegmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
+        self.statsSegmentControl.setTitle(BattingStats.battingStats, forSegmentAt: 0)
+        self.statsSegmentControl.setTitle(BowlingStats.bowlingStats, forSegmentAt: 1)
         
         switch self.statsSegmentControl.selectedSegmentIndex{
         case 0:
@@ -68,14 +70,16 @@ class PlayerInfoViewController: UIViewController {
         default:
             break
         }
+        
     }
     
+    //set Statistics of the player
     private func setupBatting(){
         self.statOneLbl.text = BattingStats.style
         self.statTwoLbl.text = BattingStats.average
         self.statThreeLbl.text = BattingStats.rate
         self.statFourLbl.text = BattingStats.runs
-
+        
         self.statOneInfoLbl.text = playerInfoViewModel?.getBattingStat()?.style.rawValue
         self.statTwoInfoLbl.text = playerInfoViewModel?.getBattingStat()?.average
         self.statThreeInfoLbl.text = playerInfoViewModel?.getBattingStat()?.strikerate

@@ -8,15 +8,25 @@
 import Foundation
 
 class PlayerInfoViewModel{
-    var player:Player?
     
+    private var player:Player?
+    
+    //init: Constructor DI
     init(player: Player? = nil) {
         self.player = player
     }
     
+    // Get selected player Info
+    func getPlayerInfo()->Player?{
+        return self.player
+    }
+    
+    // Get selected player Batting Stat
     func getBattingStat() -> Batting?{
         return self.player?.batting
     }
+    
+    // Get selected player bowling Stat
     func getBowlingStat() -> Bowling?{
         return self.player?.bowling
     }

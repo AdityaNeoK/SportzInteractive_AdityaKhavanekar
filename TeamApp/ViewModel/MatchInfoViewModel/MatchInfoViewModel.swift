@@ -8,12 +8,8 @@
 import Foundation
 
 class MatchInfoViewModel{
-    
-    var matchDetailModel:MatchDetailModel?
-    
-    init(matchDetailModel:MatchDetailModel){
-        self.matchDetailModel = matchDetailModel
-    }
+//    Variables
+    private var matchDetailModel:MatchDetailModel?
     
     private var teamHomePlayers: [Player]? {
         return self.matchDetailModel?.teams[self.matchDetailModel?.matchdetail.teamHome ?? ""]?.players.values.map({ return $0 })
@@ -32,10 +28,17 @@ class MatchInfoViewModel{
         return all
     }
     
-    init(matchDetailModel: MatchDetailModel? = nil) {
+    //init: Constructor DI
+    init(matchDetailModel:MatchDetailModel?=nil){
         self.matchDetailModel = matchDetailModel
     }
     
+//    Get whole match detail
+    func getMatchDetail()->MatchDetailModel?{
+        return self.matchDetailModel
+    }
+    
+//    Get team detail of the match selected
     func getTeamDetails(team:SelectTeam)->Team?{
         
         guard let homeTeam = self.matchDetailModel?.teams[self.matchDetailModel?.matchdetail.teamHome ?? ""],let awayTeam = self.matchDetailModel?.teams[self.matchDetailModel?.matchdetail.teamAway ?? ""] else {return nil}
@@ -50,23 +53,23 @@ class MatchInfoViewModel{
         }
     }
     
+//    Get player count of the team selected
     func getPlayerCount(team:SelectTeam)->Int{
         
         guard let awayCount = getTeamDetails(team: .away)?.players.count,
               let homeCount = getTeamDetails(team: .home)?.players.count else { return 0 }
         
         switch team{
-            
         case .home:
             return homeCount
         case .away:
             return awayCount
         case .all:
             return homeCount + awayCount
-            
         }
     }
     
+//    Get specific player information
     func getPlayer(team:SelectTeam,index:IndexPath)->Player?{
         switch team{
         case .home:

@@ -8,7 +8,7 @@
 import UIKit
 
 class MatchTableViewCell: UITableViewCell {
-
+    // Outlets
     @IBOutlet weak var venueLbl: UILabel!
     @IBOutlet weak var timeLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
@@ -17,15 +17,13 @@ class MatchTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
+    // Setup Cell
     func setupCell(model:MatchDetailModel?){
         self.venueLbl.text = model?.matchdetail.venue.name
         self.dateLbl.text = model?.matchdetail.match.date

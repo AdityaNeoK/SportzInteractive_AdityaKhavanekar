@@ -8,7 +8,7 @@
 import UIKit
 
 class MatchInfoViewController: UIViewController {
-
+    //    Outlets
     @IBOutlet weak var TitleStackView: UIStackView!
     @IBOutlet weak var awayTeamLbl: UILabel!
     @IBOutlet weak var homeTeamLbl: UILabel!
@@ -23,27 +23,7 @@ class MatchInfoViewController: UIViewController {
         self.setupTableView()
     }
     
-    private func setupUI(){
-        SquadSegmentControl.backgroundColor = .lightGray
-        SquadSegmentControl.selectedSegmentTintColor = .black
-        SquadSegmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        SquadSegmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
-        SquadSegmentControl.setTitle(self.matchInfoViewModel?.matchDetailModel?.teams[self.matchInfoViewModel?.matchDetailModel?.matchdetail.teamHome ?? ""]?.nameFull, forSegmentAt: 0)
-        SquadSegmentControl.setTitle(self.matchInfoViewModel?.matchDetailModel?.teams[self.matchInfoViewModel?.matchDetailModel?.matchdetail.teamAway ?? ""]?.nameFull, forSegmentAt: 1)
-        SquadSegmentControl.setTitle(StringConstants.all, forSegmentAt: 2)
-        
-        self.title = TitleConstants.matchInfoTitle
-        self.homeTeamLbl.text = "\(self.matchInfoViewModel?.getTeamDetails(team: .home)?.nameFull ?? "")"
-        self.awayTeamLbl.text = "\(self.matchInfoViewModel?.getTeamDetails(team: .away)?.nameFull ?? "")"
-        self.TitleStackView.layer.cornerRadius = 10
-        
-    }
-    private func setupTableView(){
-        self.playerTableView.delegate = self
-        self.playerTableView.dataSource = self
-        self.playerTableView.register(UINib(nibName: TableViewCellConstants.playerTableViewCell, bundle: nil), forCellReuseIdentifier: TableViewCellConstants.playerTableViewCell)
-    }
-    
+    // SegmentedControl Action
     @IBAction func valueChanged(_ sender: UISegmentedControl) {
         switch SquadSegmentControl.selectedSegmentIndex{
         case 0:
@@ -56,8 +36,32 @@ class MatchInfoViewController: UIViewController {
             print("")
         }
     }
+    
+    // UI setup
+    private func setupUI(){
+        self.SquadSegmentControl.backgroundColor = .lightGray
+        self.SquadSegmentControl.selectedSegmentTintColor = .black
+        self.SquadSegmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        self.SquadSegmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
+        self.SquadSegmentControl.setTitle(self.matchInfoViewModel?.getMatchDetail()?.teams[self.matchInfoViewModel?.getMatchDetail()?.matchdetail.teamHome ?? ""]?.nameFull, forSegmentAt: 0)
+        self.SquadSegmentControl.setTitle(self.matchInfoViewModel?.getMatchDetail()?.teams[self.matchInfoViewModel?.getMatchDetail()?.matchdetail.teamAway ?? ""]?.nameFull, forSegmentAt: 1)
+        self.SquadSegmentControl.setTitle(StringConstants.all, forSegmentAt: 2)
+        
+        self.title = TitleConstants.matchInfoTitle
+        self.homeTeamLbl.text = "\(self.matchInfoViewModel?.getTeamDetails(team: .home)?.nameFull ?? "")"
+        self.awayTeamLbl.text = "\(self.matchInfoViewModel?.getTeamDetails(team: .away)?.nameFull ?? "")"
+        self.TitleStackView.layer.cornerRadius = 10
+        
+    }
+    private func setupTableView(){
+        self.playerTableView.delegate = self
+        self.playerTableView.dataSource = self
+        self.playerTableView.separatorStyle = .none
+        self.playerTableView.register(UINib(nibName: TableViewCellConstants.playerTableViewCell, bundle: nil), forCellReuseIdentifier: TableViewCellConstants.playerTableViewCell)
+    }
 }
 
+//MARK: -  TableView UITableViewDelegate UITableViewDataSource
 extension MatchInfoViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,23 +99,19 @@ extension MatchInfoViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let playerScreen = PlayerInfoViewController()
         switch self.SquadSegmentControl.selectedSegmentIndex{
         case 0:
-            print(self.matchInfoViewModel?.getPlayer(team: .home, index: indexPath)?.nameFull ?? "")
             let player = self.matchInfoViewModel?.getPlayer(team: .home, index: indexPath)
             playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
             playerScreen.modalPresentationStyle = .overFullScreen
             self.present(playerScreen, animated: true)
         case 1:
-            print(self.matchInfoViewModel?.getPlayer(team: .away, index: indexPath)?.nameFull ?? "")
             let player = self.matchInfoViewModel?.getPlayer(team: .away, index: indexPath)
             playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
             playerScreen.modalPresentationStyle = .overFullScreen
             self.present(playerScreen, animated: true)
         case 2:
-            print(self.matchInfoViewModel?.getPlayer(team: .all, index: indexPath)?.nameFull ?? "")
             let player = self.matchInfoViewModel?.getPlayer(team: .all, index: indexPath)
             playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
             playerScreen.modalPresentationStyle = .overFullScreen
@@ -120,5 +120,4 @@ extension MatchInfoViewController:UITableViewDelegate,UITableViewDataSource{
             print("error")
         }
     }
-    
 }

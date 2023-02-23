@@ -13,11 +13,11 @@ enum MatchEndPoints:String, CaseIterable{
     case match2 = "sapk01222019186652.json"
     
     var completeURL: String {
-        return NetworkHelper.baseUrl + self.rawValue
+        return NetworkUrls.baseUrl + self.rawValue
     }
 }
 
-struct NetworkHelper{
+struct NetworkUrls{
     static var baseUrl = "https://demo.sportz.io/"
 }
 

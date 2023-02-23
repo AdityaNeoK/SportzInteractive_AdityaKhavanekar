@@ -8,31 +8,34 @@
 import UIKit
 
 class MatchesViewController: UIViewController {
-
-    @IBOutlet weak var matchesTableView: UITableView? {
-        didSet{
-            self.matchesTableView?.delegate = self
-            self.matchesTableView?.dataSource = self
-            self.matchesTableView?.register(UINib(nibName: TableViewCellConstants.matchesTableViewCell, bundle: nil), forCellReuseIdentifier: TableViewCellConstants.matchesTableViewCell)
-        }
-    }
+    //Outlets
+    @IBOutlet weak var matchesTableView: UITableView!
+    
+    //Variables
     var matchViewModel : MatchesViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        getAllMatches()
-    }
- 
-    private func setupUI(){
-        self.title = TitleConstants.allMatchesTitle
+        self.setupUI()
+        self.getAllMatches()
     }
     
+    //UI Functions
+    private func setupUI(){
+        self.title = TitleConstants.allMatchesTitle
+        self.setupTableView()
+    }
+    private func setupTableView(){
+        self.matchesTableView?.delegate = self
+        self.matchesTableView?.dataSource = self
+        self.matchesTableView?.register(UINib(nibName: TableViewCellConstants.matchesTableViewCell, bundle: nil), forCellReuseIdentifier: TableViewCellConstants.matchesTableViewCell)
+    }
     private func getAllMatches(){
-        matchViewModel?.getAllMatches()
+        self.matchViewModel?.getAllMatches()
     }
 }
 
+//MARK: - TableView Functions
 extension MatchesViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.matchViewModel?.getMatchesCount() ?? 0
@@ -49,12 +52,11 @@ extension MatchesViewController:UITableViewDelegate,UITableViewDataSource{
         let vc = MatchInfoViewController()
         vc.matchInfoViewModel = MatchInfoViewModel(matchDetailModel: model)
         self.navigationController?.pushViewController(vc, animated: true)
-        
     }
-    
-    
 }
 
+
+// MARK: - ViewModel Delegate functions
 extension MatchesViewController:MatchesProtocol{
     func onSuccess() {
         DispatchQueue.main.async {

@@ -7,21 +7,19 @@
 
 import Foundation
 
-protocol MatchesProtocol{
+protocol MatchesProtocol:AnyObject{
     func onSuccess()
     func onFailure(error:String)
 }
 
 class MatchesViewModel{
     
-    private let networkManager = NetworkManager()
+//    Variables
     private var matchDetailArray = [MatchDetailModel]()
-    private var delegate : MatchesProtocol?
-    
-    //Detail View
+    private weak var delegate : MatchesProtocol?
     private var playerArray = [Player]()
 
-    
+    //init: Constructor DI
     init(delegate: MatchesProtocol? = nil) {
         self.delegate = delegate
     }
@@ -33,7 +31,7 @@ class MatchesViewModel{
         MatchEndPoints.allCases.forEach {
             let url = URL(string: $0.completeURL)
             dispatchGroup.enter()
-            networkManager.getDetails(url:url,model: MatchDetailModel.self) { result in
+            NetworkManager.sharedInstance.getDetails(url:url,model: MatchDetailModel.self) { result in
                 switch result {
                 case .success(let data):
                     self.matchDetailArray.append(data)
@@ -48,11 +46,14 @@ class MatchesViewModel{
         }
     }
     
-    //FUNCTIONS Home Screen
+    //Get match countt
     func getMatchesCount()->Int{
         return matchDetailArray.count
     }
+    
+    // Get match at specific index
     func getMattchAtIndex(index:Int) -> MatchDetailModel{
         return matchDetailArray[index]
     }
+    
 }

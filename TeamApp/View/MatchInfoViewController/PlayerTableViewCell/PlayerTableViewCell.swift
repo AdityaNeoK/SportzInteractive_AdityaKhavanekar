@@ -8,7 +8,7 @@
 import UIKit
 
 class PlayerTableViewCell: UITableViewCell {
-
+    //Outlets
     @IBOutlet weak var playerExtraInfoLbl: UILabel!
     @IBOutlet weak var playerNameLbl: UILabel!
     
@@ -16,40 +16,48 @@ class PlayerTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.playerExtraInfoLbl.isHidden = true
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
     }
     
+    // Setup Cell
     func setupCell(player:Player){
         self.playerNameLbl.text = player.nameFull
-        if let captain = player.iscaptain{
-            self.playerExtraInfoLbl.isHidden = false
-            if let keeper = player.iskeeper{
-                if captain && keeper{
-                    self.playerExtraInfoLbl.text = "C & WK"
-                }
-                else if captain && (keeper == false){
-                    self.playerExtraInfoLbl.text = "C"
-                }
-                else if captain == false && keeper{
-                    self.playerExtraInfoLbl.text = "WK"
-                }
+        if let captain = player.iscaptain,let keeper = player.iskeeper{
+            if captain && keeper{
+                self.playerExtraInfoLbl.isHidden = false
+                self.playerExtraInfoLbl.text = CheckCaptainKeeper.Both
             }
-            else if captain{
-                self.playerExtraInfoLbl.text = "C"
+            else{
+                self.playerExtraInfoLbl.isHidden = true
+            }
+        }
+        else if let captain = player.iscaptain{
+            if captain{
+                self.playerExtraInfoLbl.isHidden = false
+                self.playerExtraInfoLbl.text = CheckCaptainKeeper.captain
+            }
+            else{
+                self.playerExtraInfoLbl.isHidden = true
+            }
+        }
+        else if let keeper = player.iskeeper{
+            if keeper{
+                self.playerExtraInfoLbl.isHidden = false
+                self.playerExtraInfoLbl.text = CheckCaptainKeeper.keeper
+            }
+            else{
+                self.playerExtraInfoLbl.isHidden = true
             }
         }
         else{
+            self.playerExtraInfoLbl.text = nil
             self.playerExtraInfoLbl.isHidden = true
         }
     }
     
 }
 
-enum CheckCaptainKeeper:String,CaseIterable{
-    case captain = "(C)"
-    case keeper = "(WK)"
-    case Both = "(C)(WK)"
-}
+

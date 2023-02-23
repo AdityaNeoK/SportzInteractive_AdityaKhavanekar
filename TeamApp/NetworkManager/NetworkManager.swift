@@ -9,6 +9,9 @@ import Foundation
 
 class NetworkManager{
     
+    static var sharedInstance = NetworkManager()
+    
+    private init(){}
     
     // GET API Call
     func getDetails<T:Codable>(url:URL?,model:T.Type,completion:@escaping (Result<T, Error>)->()){
