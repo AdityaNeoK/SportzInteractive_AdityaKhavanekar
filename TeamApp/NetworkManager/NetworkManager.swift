@@ -19,19 +19,18 @@ class NetworkManager{
         if let url = url{
             let task = session.dataTask(with: url) { matchData, matchResponse, matchError in
                 if matchError == nil{
-                    let response = matchResponse as! HTTPURLResponse
-                    if (response.statusCode == 200){
-                        do{
-                            let object = try JSONDecoder().decode(T.self, from: matchData!)
-                            completion(.success(object))
-                        }
-                        catch let e{
-                            debugPrint("Parsing error \(e)")
-                            completion(.failure(e))
-                        }
+                    do{
+                        let object = try JSONDecoder().decode(T.self, from: matchData!)
+                        completion(.success(object))
                     }
-                    else{
-                        completion(.failure(Error.self as! Error))
+                    catch let e{
+                        debugPrint("Parsing error \(e)")
+                        completion(.failure(e))
+                    }
+                }
+                else{
+                    if let er = matchError{
+                        completion(.failure(er))
                     }
                 }
             }
