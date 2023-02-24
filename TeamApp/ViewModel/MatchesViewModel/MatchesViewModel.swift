@@ -41,8 +41,8 @@ class MatchesViewModel{
                     self.delegate?.onFailure(error: error.localizedDescription)
                     break
                 }
+                dispatchGroup.leave()
             }
-            dispatchGroup.leave()
         }
     }
     
