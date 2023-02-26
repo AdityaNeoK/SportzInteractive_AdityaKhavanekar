@@ -59,6 +59,15 @@ class MatchInfoViewController: UIViewController {
         self.playerTableView.separatorStyle = .none
         self.playerTableView.register(UINib(nibName: TableViewCellConstants.playerTableViewCell, bundle: nil), forCellReuseIdentifier: TableViewCellConstants.playerTableViewCell)
     }
+    
+    private func showPlayerInfoAlert(player:Player?){
+        if let player = player{
+            let infoAlert = UIAlertController(title: player.nameFull, message: "\(StringConstants.battingStyle): \(player.batting.style.rawValue) \(StringConstants.newLine) \(StringConstants.bowlingStyle): \(player.bowling.style)", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: StringConstants.ok, style: .default)
+            infoAlert.addAction(okAction)
+            self.present(infoAlert, animated: true)
+        }
+    }
 }
 
 //MARK: -  TableView UITableViewDelegate UITableViewDataSource
@@ -99,23 +108,26 @@ extension MatchInfoViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let playerScreen = PlayerInfoViewController()
+//        let playerScreen = PlayerInfoViewController()
         switch self.SquadSegmentControl.selectedSegmentIndex{
         case 0:
             let player = self.matchInfoViewModel?.getPlayer(team: .home, index: indexPath)
-            playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
-            playerScreen.modalPresentationStyle = .overFullScreen
-            self.present(playerScreen, animated: true)
+//            playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
+//            playerScreen.modalPresentationStyle = .overFullScreen
+//            self.present(playerScreen, animated: true)
+            self.showPlayerInfoAlert(player: player)
         case 1:
             let player = self.matchInfoViewModel?.getPlayer(team: .away, index: indexPath)
-            playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
-            playerScreen.modalPresentationStyle = .overFullScreen
-            self.present(playerScreen, animated: true)
+//            playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
+//            playerScreen.modalPresentationStyle = .overFullScreen
+//            self.present(playerScreen, animated: true)
+            self.showPlayerInfoAlert(player: player)
         case 2:
             let player = self.matchInfoViewModel?.getPlayer(team: .all, index: indexPath)
-            playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
-            playerScreen.modalPresentationStyle = .overFullScreen
-            self.present(playerScreen, animated: true)
+//            playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
+//            playerScreen.modalPresentationStyle = .overFullScreen
+//            self.present(playerScreen, animated: true)
+            self.showPlayerInfoAlert(player: player)
         default:
             print("error")
         }

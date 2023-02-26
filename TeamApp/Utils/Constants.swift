@@ -12,6 +12,9 @@ struct StringConstants{
     static var ok = "Ok"
     static var at = "at"
     static var all = "All"
+    static var battingStyle = "Batting Style"
+    static var bowlingStyle = "Bowling Style"
+    static var newLine = "\n"
 }
 
 struct TableViewCellConstants{
@@ -25,7 +28,7 @@ struct TitleConstants{
 }
 
 struct BattingStats{
-    static var  battingStats = "Batting Stats"
+    static var battingStats = "Batting Stats"
     static var style = "Style"
     static var average = "Average"
     static var rate = "Strike Rate"
