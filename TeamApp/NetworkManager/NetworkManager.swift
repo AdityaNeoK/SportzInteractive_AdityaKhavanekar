@@ -20,7 +20,7 @@ class NetworkManager{
             let task = session.dataTask(with: url) { matchData, matchResponse, matchError in
                 if matchError == nil{
                     do{
-                        let object = try JSONDecoder().decode(T.self, from: matchData!)
+                        let object = try JSONDecoder().decode(model.self, from: matchData!)
                         completion(.success(object))
                     }
                     catch let e{
