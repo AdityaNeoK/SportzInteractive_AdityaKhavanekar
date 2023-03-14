@@ -20,12 +20,9 @@ class MatchInfoViewModel{
     }
     
     private var allPlayers: [Player]?{
-        var all = [Player]()
         guard let homePlayers = self.matchDetailModel?.teams[self.matchDetailModel?.matchdetail.teamHome ?? ""]?.players.values.map({ return $0 }) else { return nil }
         guard let awayPlayers = self.matchDetailModel?.teams[self.matchDetailModel?.matchdetail.teamAway ?? ""]?.players.values.map({ return $0 }) else { return nil }
-        all.append(contentsOf: homePlayers)
-        all.append(contentsOf: awayPlayers)
-        return all
+        return homePlayers+awayPlayers
     }
     
     //init: Constructor DI

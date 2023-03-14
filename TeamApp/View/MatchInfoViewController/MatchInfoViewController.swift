@@ -108,26 +108,26 @@ extension MatchInfoViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let playerScreen = PlayerInfoViewController()
+        let playerScreen = PlayerInfoViewController()
         switch self.SquadSegmentControl.selectedSegmentIndex{
         case 0:
             let player = self.matchInfoViewModel?.getPlayer(team: .home, index: indexPath)
-//            playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
-//            playerScreen.modalPresentationStyle = .overFullScreen
-//            self.present(playerScreen, animated: true)
+            playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
+            playerScreen.modalPresentationStyle = .overFullScreen
+            self.present(playerScreen, animated: true)
             self.showPlayerInfoAlert(player: player)
         case 1:
             let player = self.matchInfoViewModel?.getPlayer(team: .away, index: indexPath)
-//            playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
-//            playerScreen.modalPresentationStyle = .overFullScreen
-//            self.present(playerScreen, animated: true)
+            playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
+            playerScreen.modalPresentationStyle = .overFullScreen
+            self.present(playerScreen, animated: true)
             self.showPlayerInfoAlert(player: player)
         case 2:
             let player = self.matchInfoViewModel?.getPlayer(team: .all, index: indexPath)
-//            playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
-//            playerScreen.modalPresentationStyle = .overFullScreen
-//            self.present(playerScreen, animated: true)
-            self.showPlayerInfoAlert(player: player)
+            playerScreen.playerInfoViewModel = PlayerInfoViewModel(player: player)
+            playerScreen.modalPresentationStyle = .overFullScreen
+            self.present(playerScreen, animated: true)
+//            self.showPlayerInfoAlert(player: player)
         default:
             print("error")
         }
